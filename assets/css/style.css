@@ -91,10 +91,10 @@ details p{color:var(--muted);padding:0 52px 24px 0;margin:0}[dir=rtl] details p{
 .side{background:var(--maroon);color:#FBEFD6;border-color:var(--gold)}.side::before{border-color:rgba(241,215,124,.4)}.side h3{color:#FBEFD6}.side p,.side li{color:#EAD8B5}.side .clist li::before{background:#F1D77C}
 .mapbox{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px}.mapbox iframe{display:block;width:100%;height:100%;min-height:380px;border:2px solid var(--gold);border-radius:var(--r);box-shadow:var(--sh)}.mapcard{align-content:center}
 .ci{display:flex;gap:12px;color:var(--muted);font-size:.95rem}.ci svg{width:20px;height:20px;margin-top:4px;flex:none;fill:none;stroke:var(--goldD);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}@media(max-width:900px){.mapbox{grid-template-columns:minmax(0,1fr)}.mapbox iframe{min-height:340px}}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:18px;background:var(--surface);border:2px solid var(--gold);border-radius:var(--r);padding:clamp(20px,4vw,38px);box-shadow:var(--sh)}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field.full{grid-column:1/-1}
+.form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;background:var(--surface);border:2px solid var(--gold);border-radius:var(--r);padding:clamp(20px,4vw,38px);box-shadow:var(--sh)}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field.full{grid-column:1/-1}
 .field label{font:600 .72rem "Cinzel",serif;letter-spacing:.14em;text-transform:uppercase;color:var(--goldD)}.field input,.field select,.field textarea{width:100%;min-width:0;max-width:100%;height:50px;padding:0 16px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit}
 .field textarea{height:130px;padding:12px 16px;resize:vertical}.field input[type=file]{padding:10px 12px;height:auto}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);outline:none}.field .err{color:#A3121F;font-size:.82rem;min-height:1.1em}[data-theme=dark] .field .err{color:#FF9AA2}.field .bad{border-color:#A3121F}
-.msg{grid-column:1/-1;padding:14px 18px;border-radius:12px;background:var(--cream);display:none;font-size:.95rem;border-inline-start:5px solid var(--gold)}.msg.show{display:block}@media(max-width:600px){.form{grid-template-columns:1fr}}
+.msg{grid-column:1/-1;padding:14px 18px;border-radius:12px;background:var(--cream);display:none;font-size:.95rem;border-inline-start:5px solid var(--gold)}.msg.show{display:block}@media(max-width:600px){.form{grid-template-columns:minmax(0,1fr)}}
 .filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:18px}.filters button{height:42px;padding:0 20px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:600 .74rem "Cinzel",serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}.filters button.on{background:var(--goldg);border-color:#8A6508;color:#2B0D10}
 .tools{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:34px}.tools input,.tools select{height:46px;padding:0 16px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;min-width:0;max-width:100%}.tools input{flex:1 1 240px;max-width:360px}
 .count{text-align:center;color:var(--muted);margin-bottom:22px}.empty{padding:34px;text-align:center;color:var(--muted);border:2px dashed var(--line);border-radius:var(--r)}
@@ -223,3 +223,13 @@ main,.sec,.hero1,.hero2,.phero{overflow-x:clip}
 .modal .x{width:44px;height:44px;top:10px;inset-inline-end:10px;z-index:5;display:grid;place-items:center;padding:0;border:2px solid #F1D77C;background:#5E0B15;color:#FFF8E7;font-size:1.7rem;line-height:1;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.55);transition:transform .2s,background .2s}
 .modal .x:hover,.modal .x:focus-visible{background:#8B1A2B;transform:rotate(90deg) scale(1.08);outline:2px solid #FFF8E7;outline-offset:2px}
 @media(max-width:700px){.modal{padding:10px}.modal .box{max-height:94vh;padding:16px}.modal .x{position:sticky;top:0;justify-self:end;margin:0 0 -52px;grid-column:1/-1}}
+
+/* ===== mobile fix: date input ("Needed by") overflowing the form ===== */
+.form>*,.field{min-width:0;max-width:100%}
+.field input[type=date],.field input[type=time],.field input[type=datetime-local]{-webkit-appearance:none;appearance:none;display:block;box-sizing:border-box;width:100%;min-width:0;max-width:100%;inline-size:100%;height:50px;line-height:46px;padding:0 16px;text-align:start;overflow:hidden}
+.field input[type=date]::-webkit-date-and-time-value{text-align:start;margin:0;min-height:1.4em;line-height:1.4}
+.field input[type=date]::-webkit-datetime-edit{padding:0;display:block}
+.field input[type=date]::-webkit-calendar-picker-indicator{margin:0;padding:0}
+.field input[type=file]{max-width:100%}
+/* keep the back-to-top button from covering the submit button on small screens */
+@media(max-width:600px){.top{inset-block-end:84px;width:44px;height:44px}}
